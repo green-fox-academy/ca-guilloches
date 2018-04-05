@@ -1,16 +1,16 @@
 'use strict';
 
-const majorRipple = 57;
-const minorRipple = 0.13;
+const majorRipple = 60;
+const minorRipple = 0.15;
 const radiusEffect = 25;
-const angleMultiplier = 1.25;
+const angleMultiplier = 1.9;
 const amplitude = 2.5;
 
 function testCanvas() {
     const startAt = {x:0,y:0};
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
-    drawLineCircle(ctx, 100);
+    drawLineCircle(ctx, 1000);
     ctx.stroke();
 }
 
@@ -31,16 +31,27 @@ function drawLineCircle(ctx, numSegments=60) {
     py = 0,
     thetaStep = 2*Math.PI / numSegments;
 
+    let initPos = getPlotCoordinates(rR, angleMultiplier, theta, rp, s);
+    x = initPos.x;
+    y = initPos.y;
+    px = x;
+    py = y;
+
     for (let i = 0; i < numSegments; i++) {
-        x = rR * Math.cos(angleMultiplier * theta) + rp * Math.cos(s * angleMultiplier * theta);
-        y = rR * Math.sin(angleMultiplier * theta) + rp * Math.sin(s * angleMultiplier * theta);
         theta += thetaStep;
-        x *= amplitude;
-        y *= amplitude;
+        let coords = getPlotCoordinates(rR, angleMultiplier, theta, rp, s);
+        x = coords.x * amplitude;
+        y = coords.y * amplitude;
         drawLine(ctx, px, py, x, y);
         px = x;
         py = y;
     }
+}
+
+function getPlotCoordinates(rR, angleMultiplier, theta, rp, s) {
+    const x = rR * Math.cos(angleMultiplier * theta) + rp * Math.cos(s * angleMultiplier * theta);
+    const y = rR * Math.sin(angleMultiplier * theta) + rp * Math.sin(s * angleMultiplier * theta);
+    return {x, y};
 }
 
 testCanvas()
