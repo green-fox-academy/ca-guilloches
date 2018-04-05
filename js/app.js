@@ -1,17 +1,28 @@
 'use strict';
 
-const majorRipple = 60;
-const minorRipple = 0.15;
-const radiusEffect = 25;
-const angleMultiplier = 1.9;
-const amplitude = 2.5;
-
-function testCanvas() {
+function initApp() {
     const startAt = {x:0,y:0};
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
-    drawLineCircle(ctx, 1000);
-    ctx.stroke();
+    const rippleSlider = document.querySelector('#majorRipple');
+
+    rippleSlider.addEventListener('input', e => {
+        const options = {
+            majorRipple: e.target.value,
+            minorRipple: 0.15,
+            radiusEffect:25,
+            angleMultiplier: 1.9,
+            amplitude: 2.5,
+            numSegments: 1000
+        }
+
+        clearCanvas(ctx);
+        plotGuilloches(ctx, options);
+    });
+}
+
+function clearCanvas(ctx) {
+    ctx.clearRect(0, 0, 800, 600);
 }
 
 function drawLine(ctx, cx, cy, x, y) {
@@ -20,7 +31,8 @@ function drawLine(ctx, cx, cy, x, y) {
     ctx.lineTo(offset + x, offset + y);
 }
 
-function drawLineCircle(ctx, numSegments=60) {
+function plotGuilloches(ctx, {minorRipple, majorRipple, radiusEffect, angleMultiplier, amplitude, numSegments}) {
+    ctx.beginPath();
     let theta = 0,
     rp = minorRipple + radiusEffect,
     s = (majorRipple + minorRipple) / minorRipple,
@@ -46,6 +58,7 @@ function drawLineCircle(ctx, numSegments=60) {
         px = x;
         py = y;
     }
+    ctx.stroke();
 }
 
 function getPlotCoordinates(rR, angleMultiplier, theta, rp, s) {
@@ -54,4 +67,4 @@ function getPlotCoordinates(rR, angleMultiplier, theta, rp, s) {
     return {x, y};
 }
 
-testCanvas()
+initApp()
