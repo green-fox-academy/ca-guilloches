@@ -4,21 +4,25 @@ function initApp() {
     const startAt = {x:0,y:0};
     const canvas = document.querySelector('canvas');
     const ctx = canvas.getContext('2d');
-    const rippleSlider = document.querySelector('#majorRipple');
+    const sliders = document.querySelectorAll('input[type=range]');
+    const options = {
+        majorRipple: 50,
+        minorRipple: 0.15,
+        radiusEffect:25,
+        angleMultiplier: 1.9,
+        amplitude: 2.5,
+        numSegments: 1000
+    }
 
-    rippleSlider.addEventListener('input', e => {
-        const options = {
-            majorRipple: e.target.value,
-            minorRipple: 0.15,
-            radiusEffect:25,
-            angleMultiplier: 1.9,
-            amplitude: 2.5,
-            numSegments: 1000
-        }
-
-        clearCanvas(ctx);
-        plotGuilloches(ctx, options);
+    sliders.forEach(slider => {
+        slider.addEventListener('input', e => {
+            console.log(e.target.value)
+            options[e.target.id] = parseFloat(e.target.value);
+            clearCanvas(ctx);
+            plotGuilloches(ctx, options);
+        });
     });
+
 }
 
 function clearCanvas(ctx) {
