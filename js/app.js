@@ -23,6 +23,7 @@ function initApp() {
         });
     });
 
+    plotGuilloches(ctx, options);
 }
 
 function clearCanvas(ctx) {
@@ -30,9 +31,10 @@ function clearCanvas(ctx) {
 }
 
 function drawLine(ctx, cx, cy, x, y) {
-    let offset = 300;
-    ctx.moveTo(offset + cx, offset + cy);
-    ctx.lineTo(offset + x, offset + y);
+    const offsetX = 400;
+    const offsetY = 300;
+    ctx.moveTo(offsetX + cx, offsetY + cy);
+    ctx.lineTo(offsetX + x, offsetY + y);
 }
 
 function plotGuilloches(ctx, {minorRipple, majorRipple, radiusEffect, angleMultiplier, amplitude, numSegments}) {
@@ -48,8 +50,8 @@ function plotGuilloches(ctx, {minorRipple, majorRipple, radiusEffect, angleMulti
     thetaStep = 2*Math.PI / numSegments;
 
     let initPos = getPlotCoordinates(rR, angleMultiplier, theta, rp, s);
-    x = initPos.x;
-    y = initPos.y;
+    x = initPos.x * amplitude;
+    y = initPos.y * amplitude;
     px = x;
     py = y;
 
