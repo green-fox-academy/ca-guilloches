@@ -103,6 +103,31 @@ class App extends Component {
 					max="10"
 					callback={ this.updateProperty.bind(this) }
 				/>
+				<Control
+					name="Radius effect"
+					configKey="radiusEffect"
+					default="0"
+					min="0"
+					max="100"
+					callback={ this.updateProperty.bind(this) }
+				/>
+				<Control
+					name="Angle multiplier"
+					configKey="angleMultiplier"
+					default="0"
+					step="0.05"
+					min="0"
+					max="25"
+					callback={ this.updateProperty.bind(this) }
+				/>
+				<Control
+					name="Scale"
+					configKey="scale"
+					default="0"
+					min="1"
+					max="15"
+					callback={ this.updateProperty.bind(this) }
+				/>
 			</div>
 		);
 	}
