@@ -54,6 +54,12 @@ class App extends Component {
 		this.ctx.stroke();
 	}
 
+	exportCanvas() {
+		var link = document.createElement("a");
+		link.download = 'awesomeart.png';
+		link.href = this.refs.canvas.toDataURL();
+		link.click();
+	}
 
 	drawLine(cx, cy, x, y) {
 		const offsetX = this.refs.canvas.width / 2;
@@ -87,6 +93,7 @@ class App extends Component {
 		return (
 			<div className="App">
 				<canvas ref="canvas" width={600} height={300}/>
+				<button onClick={this.exportCanvas.bind(this)}>Export image</button>
 				<Control
 					name="Major ripple"
 					configKey="majorRipple"
