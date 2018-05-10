@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import Control from './components/Control'
 
 class App extends Component {
   componentDidMount() {
@@ -14,6 +15,7 @@ class App extends Component {
     return (
       <div className="App">
         <canvas ref="canvas" width={600} height={300}/>
+        <Control name="Size" default="1" min="0" max="200" />
       </div>
     );
   }
