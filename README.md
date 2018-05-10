@@ -1,10 +1,13 @@
-# parcel-react
+# Guilloches
 
-A minimal React.js boilerplate with [parcel as bundler](https://github.com/parcel-bundler/parcel). Parcel is an alternative web application bundler to Webpack. Read more about it: [Getting started with React and Parcel](https://www.robinwieruch.de/parcel-react-setup/).
+A nice little canvas drawing app.
+
+## Technologies
+
+- Parcel module bundler
+- React
 
 ## Installation
 
-* `git clone git@github.com:rwieruch/parcel-react.git`
-* `cd parcel-react`
-* `npm install`
-* `npm start`
+- `npm install`
+- `npm start`
