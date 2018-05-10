@@ -19,6 +19,7 @@ class App extends Component {
 
 	componentDidMount() {
 		this.ctx = this.refs.canvas.getContext('2d');
+		this.plotGuilloches(this.options);
 	}
 
 	plotGuilloches(options) {
@@ -89,7 +90,7 @@ class App extends Component {
 				<Control
 					name="Major ripple"
 					configKey="majorRipple"
-					default="1"
+					default={ this.options.majorRipple }
 					min="0"
 					max="200"
 					callback={ this.updateProperty.bind(this) }
@@ -97,7 +98,7 @@ class App extends Component {
 				<Control
 					name="Minor ripple"
 					configKey="minorRipple"
-					default="0"
+					default={ this.options.minorRipple }
 					step="0.05"
 					min="0"
 					max="10"
@@ -106,7 +107,7 @@ class App extends Component {
 				<Control
 					name="Radius effect"
 					configKey="radiusEffect"
-					default="0"
+					default={ this.options.radiusEffect }
 					min="0"
 					max="100"
 					callback={ this.updateProperty.bind(this) }
@@ -114,7 +115,7 @@ class App extends Component {
 				<Control
 					name="Angle multiplier"
 					configKey="angleMultiplier"
-					default="0"
+					default={ this.options.angleMultiplier }
 					step="0.05"
 					min="0"
 					max="25"
@@ -123,7 +124,7 @@ class App extends Component {
 				<Control
 					name="Scale"
 					configKey="scale"
-					default="0"
+					default={ this.options.scale }
 					min="1"
 					max="15"
 					callback={ this.updateProperty.bind(this) }
