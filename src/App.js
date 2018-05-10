@@ -21,12 +21,6 @@ class App extends Component {
 		this.ctx = this.refs.canvas.getContext('2d');
 	}
 
-	updateCanvas(pos) {
-		this.clearCanvas();
-		this.options.majorRipple = pos;
-		this.plotGuilloches(this.options);
-	}
-
 	plotGuilloches(options) {
 		const {minorRipple, majorRipple, radiusEffect, angleMultiplier, scale, numSegments} = options;
 
@@ -73,7 +67,6 @@ class App extends Component {
 		return {x, y};
 	}
 
-
 	clearCanvas() {
 		this.ctx.clearRect(
 			0,
@@ -83,15 +76,33 @@ class App extends Component {
 		);
 	}
 
-	updateProperty(value) {
-		this.updateCanvas(value);
+	updateProperty(property, value) {
+		this.clearCanvas();
+		this.options[property] = value;
+		this.plotGuilloches(this.options);
 	}
 
 	render() {
 		return (
 			<div className="App">
 				<canvas ref="canvas" width={600} height={300}/>
-				<Control name="Size" default="1" min="0" max="200" callback={ this.updateProperty.bind(this) } />
+				<Control
+					name="Major ripple"
+					configKey="majorRipple"
+					default="1"
+					min="0"
+					max="200"
+					callback={ this.updateProperty.bind(this) }
+				/>
+				<Control
+					name="Minor ripple"
+					configKey="minorRipple"
+					default="0"
+					step="0.05"
+					min="0"
+					max="10"
+					callback={ this.updateProperty.bind(this) }
+				/>
 			</div>
 		);
 	}
