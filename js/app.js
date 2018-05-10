@@ -10,9 +10,12 @@ function initApp() {
         minorRipple: 0.15,
         radiusEffect:25,
         angleMultiplier: 1.9,
-        amplitude: 2.5,
-        numSegments: 1000
+        scale: 2.5,
+        numSegments: 3000
     }
+
+    clearCanvas(ctx);
+    ctx.strokeStyle = 'rgba(255,255,255,0.5)'
 
     sliders.forEach(slider => {
         slider.addEventListener('input', e => {
@@ -27,7 +30,8 @@ function initApp() {
 }
 
 function clearCanvas(ctx) {
-    ctx.clearRect(0, 0, 800, 600);
+    ctx.fillStyle = '#127';
+    ctx.fillRect(0, 0, 800, 600);
 }
 
 function drawLine(ctx, cx, cy, x, y) {
@@ -37,29 +41,29 @@ function drawLine(ctx, cx, cy, x, y) {
     ctx.lineTo(offsetX + x, offsetY + y);
 }
 
-function plotGuilloches(ctx, {minorRipple, majorRipple, radiusEffect, angleMultiplier, amplitude, numSegments}) {
+function plotGuilloches(ctx, {minorRipple, majorRipple, radiusEffect, angleMultiplier, scale, numSegments}) {
     ctx.beginPath();
     let theta = 0,
     rp = minorRipple + radiusEffect,
     s = (majorRipple + minorRipple) / minorRipple,
     rR = majorRipple + minorRipple,
-    x = 0,
-    y = 0,
-    px = 0,
-    py = 0,
+    x,
+    y,
+    px,
+    py,
     thetaStep = 2*Math.PI / numSegments;
 
     let initPos = getPlotCoordinates(rR, angleMultiplier, theta, rp, s);
-    x = initPos.x * amplitude;
-    y = initPos.y * amplitude;
+    x = initPos.x * scale;
+    y = initPos.y * scale;
     px = x;
     py = y;
 
     for (let i = 0; i < numSegments; i++) {
         theta += thetaStep;
         let coords = getPlotCoordinates(rR, angleMultiplier, theta, rp, s);
-        x = coords.x * amplitude;
-        y = coords.y * amplitude;
+        x = coords.x * scale;
+        y = coords.y * scale;
         drawLine(ctx, px, py, x, y);
         px = x;
         py = y;
