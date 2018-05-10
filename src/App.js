@@ -14,7 +14,16 @@ class App extends Component {
 
 	updateCanvas(pos) {
 		this.clearCanvas();
+		this.drawLine(0, 0, pos, pos);
 		this.ctx.fillRect(pos, pos, 100, 100);
+		this.ctx.stroke();
+	}
+
+	drawLine(cx, cy, x, y) {
+		const offsetX = this.refs.canvas.width / 2;
+		const offsetY = this.refs.canvas.height / 2;
+		this.ctx.moveTo(offsetX + cx, offsetY + cy);
+		this.ctx.lineTo(offsetX + x, offsetY + y);
 	}
 
 	clearCanvas() {

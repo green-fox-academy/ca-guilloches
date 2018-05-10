@@ -3,7 +3,7 @@ import React, { Component } from 'react';
 class Control extends Component {
 
 	changeEvent(e) {
-		console.log(this.props.callback(this.refs.slider.value))
+		this.props.callback(parseFloat(this.refs.slider.value));
 	}
 
 	render() {
